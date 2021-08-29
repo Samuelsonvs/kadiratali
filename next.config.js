@@ -16,6 +16,7 @@ const ContentSecurityPolicy = `
   child-src *.google.com;
   style-src 'self' 'unsafe-inline';
   img-src * blob: data:;
+  media-src 'none';
   connect-src *;
   font-src 'self';
 `;
