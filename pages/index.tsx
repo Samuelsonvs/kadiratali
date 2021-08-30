@@ -118,7 +118,7 @@ const Home: NextPage = () => {
         <div>
           <canvas
             ref={canvaRef}
-            className="block opacity-20">
+            className="block opacity-60">
           </canvas>
           <canvas
             ref={canvaWakeUp}
