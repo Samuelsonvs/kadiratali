@@ -7,7 +7,6 @@ class MyDocument extends Document {
         <Head>
           <link href="/favicons/favicon.ico" rel="shortcut icon" />
           <link href="/favicons/site.webmanifest" rel="manifest" />
-          <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
           <link
             href="/favicons/apple-touch-icon.png"
             rel="apple-touch-icon"

@@ -33,6 +33,7 @@ main {
 .matrix-bg {
   position: absolute;
   opacity: 0.7;
+  inset: 0 0 0 0;
 }
 
 .wakeup {

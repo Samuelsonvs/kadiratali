@@ -30,7 +30,7 @@ export default function Container({
       const context = canvaRef.current.getContext('2d');
       if (context) {
         const contextWidth = canvaRef.current.width = screen.width;
-        const contextHeight = canvaRef.current.height = window.innerHeight;
+        const contextHeight = canvaRef.current.height = screen.height;
         const letters = '00010101010 1001010 100101010010 1001010101 0100 101010101001 010 101010101010';
         const splitLetters = letters.split('');
         const fontSize = 10;
@@ -141,6 +141,7 @@ export default function Container({
         />
         <link rel="canonical" href={`https://kadiratali.com${router.asPath}`} />
         <meta property="og:type" content={meta.type} />
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
         <meta property="og:site_name" content="Kadir Atalı" />
         <meta property="og:description" content={meta.description} />
         <meta property="og:title" content={meta.title} />
