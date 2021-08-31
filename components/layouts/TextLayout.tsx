@@ -14,6 +14,7 @@ const TextLayout = ({text, underscore}: TextLayoutType) => {
     const con = underscoreRef.current
     const target = textRef.current
     if (con && target) {
+      target.innerHTML = text
       const consoleText = (words:string, underscore:boolean) => {
         if (!underscore) {
           con.className = 'console-underscore hidden'

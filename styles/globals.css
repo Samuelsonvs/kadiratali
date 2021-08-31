@@ -7,8 +7,15 @@ body {
   padding: 0;
   margin: 0;
   overflow-x: hidden;
+  height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 a {
@@ -29,6 +36,7 @@ a {
 main {
   margin-top: 30px;
 }
+
 /* Container */
 .matrix-bg {
   position: absolute;
@@ -42,12 +50,15 @@ main {
 }
 
 .temp {
-  position: absolute;
-  inset: 0 0 0 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
   z-index: 20;
-  padding-top: 5rem;
+  padding-top: 2rem;
+  min-height: 100vh;
 }
 /* Container */
 
@@ -71,6 +82,7 @@ main {
 
 /* terminal animated text */
 
+/* command-line-input */
 .command-line {
   background-color: rgba(0,0,0,0);
   width: 280px;
@@ -89,3 +101,4 @@ input[type="submit"] {
   cursor: pointer;
 }
 
+/* command-line-input */

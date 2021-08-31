@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useRef } from 'react';
 import { ContainerProps } from "@/interfaces/interface";
 import Navbar from "@/components/layouts/Navbar";
+import Footer from "@/components/layouts/Footer";
 
 interface drp {
   [key:number]: number,
@@ -150,7 +151,7 @@ export default function Container({
           <meta property="article:published_time" content={meta.date} />
         )}
       </Head>
-      <div>
+      <div className="">
         <canvas
           ref={canvaRef}
           className="matrix-bg">
@@ -161,13 +162,16 @@ export default function Container({
         >
         </canvas>
         <div className="temp">
-          <Navbar />
-          <main>
-            <div>
-                {children}
-            </div>
-          </main>
+          <div className="nav-main-container">
+            <Navbar />
+            <main>
+              <div>
+                  {children}
+              </div>
+            </main>
+          </div>
           <footer>
+            <Footer />
           </footer>
         </div>
       </div>
