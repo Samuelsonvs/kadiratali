@@ -7,7 +7,7 @@ const Home: NextPage = () => {
 
     return (
       <Container>
-        <div className="pr-12">
+        <div>
           <div className="text-green-300 font-mono">
             <TextLayout text={text} underscore={true} />
           </div>

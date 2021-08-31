@@ -46,7 +46,7 @@ const TextLayout = ({text, underscore}: TextLayoutType) => {
     }
   }, [textRef, underscoreRef, text, underscore])
     return (
-          <div className='console-container pr-2 blog'>
+          <div className='console-container pr-0 sm:pr-2 blog'>
             <span ref={textRef} id='text'></span>
             <div ref={underscoreRef} className='console-underscore' id='console'>&#95;</div>
           </div>
