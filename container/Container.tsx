@@ -29,25 +29,25 @@ export default function Container({
     if (canvaRef.current) {
       const context = canvaRef.current.getContext('2d');
       if (context) {
-        canvaRef.current.width = screen.width;
-        canvaRef.current.height = screen.height;
+        const contextWidth = canvaRef.current.width = screen.width;
+        const contextHeight = canvaRef.current.height = window.innerHeight;
         const letters = '00010101010 1001010 100101010010 1001010101 0100 101010101001 010 101010101010';
         const splitLetters = letters.split('');
         const fontSize = 10;
-        const columns = canvaRef.current.width / fontSize;
+        const columns = contextWidth / fontSize;
         let drops:drp = [];
         for (let i = 0; i < columns; i++) {
           drops[i] = 1;
         };
         const draw = () =>  {
           context.fillStyle = 'rgba(0, 0, 0, .1)';
-          context.fillRect(0, 0, Number(canvaRef?.current?.width), Number(canvaRef?.current?.height));
+          context.fillRect(0, 0, contextWidth, contextHeight);
           for (let i = 0; i < drops.length; i++) {
             const text = splitLetters[Math.floor(Math.random() * splitLetters.length)];
             context.fillStyle = '#0f0';
             context.fillText(text, i * fontSize, drops[i] * fontSize);
             drops[i]++;
-            if (drops[i] * fontSize > Number(canvaRef?.current?.height) && Math.random() > .95) {
+            if (drops[i] * fontSize > contextHeight && Math.random() > .95) {
               drops[i] = 0;
             }
           }

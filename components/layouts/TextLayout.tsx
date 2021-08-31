@@ -21,10 +21,6 @@ const TextLayout = ({text, underscore}: TextLayoutType) => {
         let letterCount = 1;
         let visible = true;
         window.setInterval(function() {
-          if (words[letterCount] === "<") {
-            target.innerHTML = "</br>"
-            letterCount += 1;
-          }; 
           if (letterCount !==words.length+1) {
             target.innerHTML = words.substring(0, letterCount);
             letterCount += 1;
@@ -46,7 +42,7 @@ const TextLayout = ({text, underscore}: TextLayoutType) => {
     }
   }, [textRef, underscoreRef, text, underscore])
     return (
-          <div className='console-container pr-0 sm:pr-2 blog'>
+          <div className='console-container pr-0 sm:pr-2'>
             <span ref={textRef} id='text'></span>
             <div ref={underscoreRef} className='console-underscore' id='console'>&#95;</div>
           </div>
