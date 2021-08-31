@@ -1,6 +1,12 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useEffect, useRef } from 'react';
 import { ContainerProps } from "@/interfaces/interface";
+
+interface drp {
+  [key:number]: number,
+  length: number
+}
 
 export default function Container({
   children,
@@ -14,6 +20,113 @@ export default function Container({
     type: "website",
     date: "02.02.02",
   };
+
+  const canvaRef = useRef<HTMLCanvasElement>(null);
+  const canvaWakeUp = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    if (canvaRef.current) {
+      const context = canvaRef.current.getContext('2d');
+      if (context) {
+        canvaRef.current.width = screen.width;
+        canvaRef.current.height = screen.height;
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZ';
+        const splitLetters = letters.split('');
+        const fontSize = 10;
+        const columns = canvaRef.current.width / fontSize;
+        let drops:drp = [];
+        for (let i = 0; i < columns; i++) {
+          drops[i] = 1;
+        };
+        const draw = () =>  {
+          context.fillStyle = 'rgba(0, 0, 0, .1)';
+          context.fillRect(0, 0, Number(canvaRef?.current?.width), Number(canvaRef?.current?.height));
+          for (let i = 0; i < drops.length; i++) {
+            const text = splitLetters[Math.floor(Math.random() * splitLetters.length)];
+            context.fillStyle = '#0f0';
+            context.fillText(text, i * fontSize, drops[i] * fontSize);
+            drops[i]++;
+            if (drops[i] * fontSize > Number(canvaRef?.current?.height) && Math.random() > .95) {
+              drops[i] = 0;
+            }
+          }
+        };
+        const interval = setInterval(draw, 50);
+        return () => clearInterval(interval);
+      }
+    }
+  }, [canvaRef])
+
+  useEffect(() => {
+    if (canvaWakeUp.current) {
+      const context = canvaWakeUp.current.getContext('2d');
+      if (context) {
+        const contextWidth = canvaWakeUp.current.width = window.innerWidth;
+        const contextHeight = canvaWakeUp.current.height = 75;
+        context.font = 'normal 20px monospace';
+        context.textAlign = 'left';
+        context.textBaseline = 'top';
+        context.fillStyle = '#3f3';
+        context.strokeStyle = 'rgba(0, 0, 0, .3)';
+        context.shadowColor = '#3f3';
+
+        const messageString = 'Wake up, Kadir...';
+        const messageArray = messageString.split('');
+        const messageLength = messageArray.length;
+        let pointer = 0;
+        let typeTick = 0;
+        const typeTickMax = 5;
+        let typeResetTick = 0;
+        const typeResetMax = 140;
+
+        const updateTypeTick = function(){
+          if(pointer < messageLength){
+            if(typeTick < typeTickMax){
+              typeTick++;
+            } else {
+              typeTick = 0;
+              pointer++;
+            }
+          } else {
+            if(typeResetTick < typeResetMax){
+              typeResetTick++;
+            } else {
+              typeResetTick = 0;
+              typeTick = 0;
+              pointer = 0;
+            }
+          }
+        }
+
+        const renderMessage = function(){
+          const text = messageArray.slice(0, pointer);
+          context.shadowBlur = 6;
+          context.fillText(text.join(''), 20, 20);
+          context.shadowBlur = 0;
+        }
+
+        const renderLines = function(){
+          context.beginPath();
+          for(let i = 0; i < contextHeight/2; i += 1){    
+            context.moveTo(0, (i*2) + .5);
+            context.lineTo(contextWidth, (i*2) + .5);   
+          }
+          context.stroke();
+        }
+
+        const loop = function(){
+          context.clearRect(0, 0, contextWidth, contextHeight);
+          updateTypeTick();
+          renderMessage();
+          renderLines();
+          const timeout = setTimeout(loop, 16);
+          return () => clearTimeout(timeout);
+        }
+
+        loop();
+      }
+    }
+  }, [canvaWakeUp])
 
   return (
     <div>
@@ -37,7 +150,20 @@ export default function Container({
       </Head>
 
       <main>
-        {children}
+        <canvas
+          ref={canvaRef}
+          className="opacity-60">
+        </canvas>
+        <div className="absolute inset-0">
+            <canvas
+              className="relative z-20"
+              ref={canvaWakeUp}
+            >
+            </canvas>
+            <div className="pl-5">
+              {children}
+            </div>
+          </div>
       </main>
       <footer>
       </footer>
