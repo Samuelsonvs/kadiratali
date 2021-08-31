@@ -45,7 +45,7 @@ const Navbar = () => {
     return (
         <div className="max-w-4xl text-green-300 font-mono">
             <form className="flex flex-col sm:flex-row" onSubmit={handleSubmit(onSubmit)}>
-                <input className="command-line" placeholder="Type 'help' for command list." autoComplete="off" autoFocus={true} {...register("command")} />
+                <input className="command-line" placeholder="Type 'help' for command list." autoComplete="off"{...register("command")} />
                 <input className="command-line-button mt-3 sm:mt-0" type="submit" value="Send" />
             </form>
         </div>
