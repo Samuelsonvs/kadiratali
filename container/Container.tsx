@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useRef } from 'react';
 import { ContainerProps } from "@/interfaces/interface";
+import Navbar from "@/components/layouts/Navbar";
 
 interface drp {
   [key:number]: number,
@@ -30,7 +31,7 @@ export default function Container({
       if (context) {
         canvaRef.current.width = screen.width;
         canvaRef.current.height = screen.height;
-        const letters = 'ABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZ';
+        const letters = '00010101010 1001010 100101010010 1001010101 0100 101010101001 010 101010101010';
         const splitLetters = letters.split('');
         const fontSize = 10;
         const columns = canvaRef.current.width / fontSize;
@@ -61,7 +62,7 @@ export default function Container({
     if (canvaWakeUp.current) {
       const context = canvaWakeUp.current.getContext('2d');
       if (context) {
-        const contextWidth = canvaWakeUp.current.width = window.innerWidth;
+        const contextWidth = canvaWakeUp.current.width = screen.width;
         const contextHeight = canvaWakeUp.current.height = 75;
         context.font = 'normal 20px monospace';
         context.textAlign = 'left';
@@ -148,25 +149,27 @@ export default function Container({
           <meta property="article:published_time" content={meta.date} />
         )}
       </Head>
-
-      <main>
+      <div>
         <canvas
           ref={canvaRef}
-          className="opacity-60">
+          className="matrix-bg">
         </canvas>
-        <div className="absolute inset-0">
-            <canvas
-              className="relative z-20"
-              ref={canvaWakeUp}
-            >
-            </canvas>
-            <div className="pl-5">
-              {children}
+        <canvas
+          ref={canvaWakeUp}
+          className="wakeup"
+        >
+        </canvas>
+        <div className="temp">
+          <Navbar />
+          <main>
+            <div>
+                {children}
             </div>
-          </div>
-      </main>
-      <footer>
-      </footer>
+          </main>
+          <footer>
+          </footer>
+        </div>
+      </div>
     </div>
   );
 }
