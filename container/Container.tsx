@@ -151,29 +151,30 @@ export default function Container({
           <meta property="article:published_time" content={meta.date} />
         )}
       </Head>
-      <div className="">
-        <canvas
+      <canvas
           ref={canvaRef}
           className="matrix-bg">
         </canvas>
-        <canvas
-          ref={canvaWakeUp}
-          className="wakeup"
-        >
-        </canvas>
-        <div className="temp">
-          <div className="nav-main-container">
-            <Navbar />
-            <main>
-              <div>
-                  {children}
-              </div>
-            </main>
-          </div>
+      <div className="temp">
+        <div>
+          <canvas
+            ref={canvaWakeUp}
+            className="wakeup"
+          >
+          </canvas>
+        <Navbar />
+        </div>
+          
+          <main>
+            <div>
+                {children}
+            </div>
+          </main>
+          
           <footer>
             <Footer />
           </footer>
-        </div>
+        
       </div>
     </div>
   );

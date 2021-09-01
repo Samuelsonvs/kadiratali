@@ -9,6 +9,9 @@ const Home: NextPage = () => {
         <div>
           <div className="text-green-300 font-mono">
             <TextLayout text={text} underscore={true} />
+            <TextLayout text={text} underscore={true} />
+            <TextLayout text={text} underscore={true} />
+            <TextLayout text={text} underscore={true} />
           </div>
         </div>
     </Container>
