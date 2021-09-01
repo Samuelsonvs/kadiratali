@@ -31,7 +31,7 @@ export default function Container({
       const context = canvaRef.current.getContext('2d');
       if (context) {
         const contextWidth = canvaRef.current.width = screen.width;
-        const contextHeight = canvaRef.current.height = screen.height;
+        const contextHeight = canvaRef.current.height = screen.availHeight;
         const letters = '00010101010 1001010 100101010010 1001010101 0100 101010101001 010 101010101010';
         const splitLetters = letters.split('');
         const fontSize = 10;
@@ -152,9 +152,10 @@ export default function Container({
         )}
       </Head>
       <canvas
-          ref={canvaRef}
-          className="matrix-bg">
-        </canvas>
+        ref={canvaRef}
+        className="matrix-bg"
+        >
+      </canvas>
       <div className="temp">
         <div>
           <canvas
@@ -162,18 +163,16 @@ export default function Container({
             className="wakeup"
           >
           </canvas>
-        <Navbar />
+          <Navbar />  
         </div>
           
-          <main>
-            <div>
-                {children}
-            </div>
-          </main>
-          
-          <footer>
-            <Footer />
-          </footer>
+        <main>
+          {children}
+        </main>
+        
+        <footer>
+          <Footer />
+        </footer>
         
       </div>
     </div>
