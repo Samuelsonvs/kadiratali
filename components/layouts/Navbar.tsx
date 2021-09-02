@@ -29,7 +29,7 @@ const Navbar = () => {
       const onSubmit = (data: FormInputs) => {
           const content = data.command.toLowerCase()
         if (navList[content]) {
-            router.push(`${navList[content]}`, undefined, { shallow: true });
+            router.push(`${navList[content]}`);
         }
       };
 
