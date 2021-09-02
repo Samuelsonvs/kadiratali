@@ -4,7 +4,7 @@ const Navbar = () => {
       <a
         target="_blank"
         rel="noopener noreferrer"
-        href="https://github.com/Samuelsonvs/kadiratali"
+        href="https://github.com/kadiratali"
       >
         <svg
           className="mr-3"
