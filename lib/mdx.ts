@@ -8,18 +8,16 @@ import rehypeCodeTitles from "rehype-code-titles";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrism from "rehype-prism-plus";
 
-
 export async function getFiles(type: any) {
   return readdirSync(join(process.cwd(), "mdxData", type));
 }
 
-export async function getFileBySlug(type:string, slug:string) {
-  const source:string = slug
+export async function getFileBySlug(type: string, slug: string) {
+  const source: string = slug
     ? readFileSync(join(process.cwd(), "mdxData", type, `${slug}.mdx`), "utf8")
     : readFileSync(join(process.cwd(), "mdxData", `${type}.mdx`), "utf8");
 
-
-  const { code, frontmatter } =  await bundleMDX(source , {
+  const { code, frontmatter } = await bundleMDX(source, {
     xdmOptions(options: any) {
       options.remarkPlugins = [...(options?.remarkPlugins ?? []), remarkGfm];
       options.rehypePlugins = [
@@ -31,16 +29,14 @@ export async function getFileBySlug(type:string, slug:string) {
           rehypeAutolinkHeadings,
           {
             properties: {
-              className: ['anchor']
-            }
-          }
-        ]
+              className: ["anchor"],
+            },
+          },
+        ],
       ];
       return options;
-    }
+    },
   });
-    
-
 
   return {
     code,
@@ -52,10 +48,10 @@ export async function getFileBySlug(type:string, slug:string) {
   };
 }
 
-export async function getAllFilesFrontMatter(type:string) {
+export async function getAllFilesFrontMatter(type: string) {
   const files = readdirSync(join(process.cwd(), "mdxData", type));
 
-  return files.reduce((allPosts:any, postSlug:any) => {
+  return files.reduce((allPosts: any, postSlug: any) => {
     const source = readFileSync(
       join(process.cwd(), "mdxData", type, postSlug),
       "utf8"

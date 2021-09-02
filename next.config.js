@@ -59,4 +59,3 @@ const securityHeaders = [
     value: "camera=(), microphone=(), geolocation=()",
   },
 ];
-

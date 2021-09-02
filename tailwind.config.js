@@ -1,12 +1,12 @@
 module.exports = {
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       textColor: {
-        'primary': '#32fb32',
-        'secondary': '#ffed4a',
-        'danger': '#e3342f',
+        primary: "#32fb32",
+        secondary: "#ffed4a",
+        danger: "#e3342f",
       },
       fontFamily: {
         typography: (theme) => ({
@@ -28,12 +28,12 @@ module.exports = {
               "blockquote p:last-of-type::after": false,
             },
           },
-        })
-      }
+        }),
+      },
     },
   },
   variants: {
     extend: {},
   },
   plugins: [require("@tailwindcss/typography")],
-}
+};

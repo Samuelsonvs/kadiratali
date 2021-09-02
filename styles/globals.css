@@ -10,8 +10,8 @@ body {
   height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 body::-webkit-scrollbar {
@@ -69,27 +69,27 @@ footer {
 
 /* terminal animated text */
 .hidden {
-  opacity:0;
+  opacity: 0;
 }
 .console-container {
-  font-size:1rem;
+  font-size: 1rem;
   position: relative;
   display: block;
-  color:#32fb32;
-  margin:auto;
+  color: #32fb32;
+  margin: auto;
 }
 .console-underscore {
-  display:inline-block;
-  position:relative;
-  top:-0.14em;
-  left:10px;
+  display: inline-block;
+  position: relative;
+  top: -0.14em;
+  left: 10px;
 }
 
 /* terminal animated text */
 
 /* command-line-input */
 .command-line {
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   width: 280px;
   border: none;
 }
@@ -98,9 +98,9 @@ footer {
 }
 
 input[type="submit"] {
-  background-color: rgba(0,0,0,0);
-  padding:0 5px;
-  border:2px solid rgba(50, 251, 50, 0.5);
+  background-color: rgba(0, 0, 0, 0);
+  padding: 0 5px;
+  border: 2px solid rgba(50, 251, 50, 0.5);
   color: #32fb32;
   text-decoration: none;
   cursor: pointer;
@@ -108,11 +108,9 @@ input[type="submit"] {
 
 /* command-line-input */
 
-
-
 /* mdx */
 .prose {
-  @apply text-primary
+  @apply text-primary;
 }
 .prose .anchor {
   @apply absolute invisible;
@@ -122,15 +120,15 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-.prose ul>li:before {
+.prose ul > li:before {
   content: "";
   position: absolute;
   background-color: #04f944;
   border-radius: 50%;
-  width: .375em;
-  height: .375em;
-  top: calc(.875em - .1875em);
-  left: .25em;
+  width: 0.375em;
+  height: 0.375em;
+  top: calc(0.875em - 0.1875em);
+  left: 0.25em;
 }
 
 .anchor:hover {
@@ -138,7 +136,7 @@ input[type="submit"] {
 }
 
 .prose .anchor:after {
-  @apply text-gray-300 ;
+  @apply text-gray-300;
   content: "#";
 }
 
@@ -169,11 +167,11 @@ input[type="submit"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  @apply text-gray-700;
+  @apply text-primary;
 }
 
 .token.punctuation {
-  @apply text-gray-700;
+  @apply text-primary;
 }
 
 .token.property,
@@ -222,8 +220,7 @@ input[type="submit"] {
 
 code[class*="language-"],
 pre[class*="language-"] {
-  @apply text-green-500 bg-opacity-0 border-green-500;  /*  */
-
+  @apply text-green-500 bg-opacity-0 border-green-500; /*  */
 }
 
 pre::-webkit-scrollbar {
@@ -276,4 +273,4 @@ table {
   display: table;
   overflow-y: scroll;
 }
- /* mdx */
+/* mdx */
