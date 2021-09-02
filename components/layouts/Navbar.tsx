@@ -10,14 +10,10 @@ interface FormInputs {
 
 interface navListType {
     [key: string]: string;
-    home: string,
-    blog: string,
-    help: string,
-    projects: string,
 }
 
 const navList: navListType = {
-    home:"/", blog:"/blog", help:"/help", projects:"/projects" 
+    home:"/", blog:"/blog", help:"/help", projects:"/projects", 1:"/blog/use-async", 2:"/blog/use-persisted-state" 
 };
 
 const Navbar = () => {

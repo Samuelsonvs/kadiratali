@@ -3,9 +3,9 @@ import Container from '@/container/Container';
 import type { NextPage } from 'next';
 
 const commandList = [
-    "HELP:   is going to help",
-    "HOME:   is going to homepage",
-    "BLOG:   is going to blog"
+    "HELP:   Command list.",
+    "HOME:   Landing page.",
+    "BLOG:   Articles page."
 ]
 
 const Help: NextPage = () => {
