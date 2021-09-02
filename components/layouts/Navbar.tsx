@@ -17,8 +17,8 @@ const navList: navListType = {
   blog: "/blog",
   help: "/help",
   projects: "/projects",
-  1: "/blog/use-async",
-  2: "/blog/use-persisted-state",
+  1: "/blog/1-use-async",
+  2: "/blog/2-use-persisted-state",
 };
 
 const Navbar = () => {
