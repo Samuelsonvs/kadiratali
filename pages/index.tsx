@@ -8,11 +8,9 @@ const text =
 const Home: NextPage = () => {
   return (
     <Container>
-      <div>
-        <div className="text-green-300 font-mono">
+        <div className="text-green-300 font-mono max-w-3xl mx-auto">
           <TextLayout text={text} underscore={true} />
         </div>
-      </div>
     </Container>
   );
 };

@@ -8,8 +8,7 @@ const Blog: NextPage = ({ posts }: any) => {
   const len = posts.length;
   return (
     <Container>
-      <div>
-        <div className="text-green-300 font-mono">
+        <div className="text-green-300 font-mono max-w-3xl mx-auto">
           {posts.map((s: any, idx: number) => {
             return (
               <TextLayout
@@ -20,7 +19,6 @@ const Blog: NextPage = ({ posts }: any) => {
             );
           })}
         </div>
-      </div>
     </Container>
   );
 };

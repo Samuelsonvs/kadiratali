@@ -41,6 +41,8 @@ const Navbar = () => {
     const content = data.command.toLowerCase();
     if (navList[content]) {
       router.push(`${navList[content]}`);
+    } else {
+      router.push("/404")
     }
   };
 

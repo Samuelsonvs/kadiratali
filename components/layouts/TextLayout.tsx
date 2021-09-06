@@ -1,4 +1,3 @@
-import Container from "@/container/Container";
 import { useEffect, useRef } from "react";
 
 interface TextLayoutType {

@@ -9,11 +9,10 @@ const commandList = [
 ];
 
 const Help: NextPage = () => {
-  const text = "Burası help Page";
   return (
     <Container>
       <div>
-        <div className="text-green-300 font-mono">
+        <div className="text-green-300 font-mono max-w-3xl mx-auto">
           <TextLayout text={commandList[0]} underscore={false} />
           <TextLayout text={commandList[1]} underscore={false} />
           <TextLayout text={commandList[2]} underscore={true} />

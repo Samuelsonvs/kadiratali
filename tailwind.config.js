@@ -8,6 +8,9 @@ module.exports = {
         secondary: "#ffed4a",
         danger: "#e3342f",
       },
+      borderColor: {
+        primary: "#32fb32"
+      },
       fontFamily: {
         typography: (theme) => ({
           DEFAULT: {
