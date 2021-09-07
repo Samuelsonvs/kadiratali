@@ -145,7 +145,7 @@ input[type="submit"] {
 }
 
 .prose pre {
-  @apply border border-gray-200 bg-gray-900 bg-opacity-0;
+  @apply border border-green-500 text-green-300 bg-gray-900 bg-opacity-0;
 }
 
 .prose code {
