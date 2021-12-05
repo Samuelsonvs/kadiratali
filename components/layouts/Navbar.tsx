@@ -52,13 +52,13 @@ const Navbar = () => {
     }
   }, [isSubmitSuccessful, reset]);
   return (
-    <div className="max-w-4xl text-green-300 font-mono">
+    <div className="max-w-4xl font-mono">
       <form
         className="flex flex-col sm:flex-row"
         onSubmit={handleSubmit(onSubmit)}
       >
         <input
-          className="command-line"
+          className="custom-input border-none"
           placeholder="Type 'help' for command list."
           autoComplete="off"
           autoFocus={true}
