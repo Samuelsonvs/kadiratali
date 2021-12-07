@@ -11,10 +11,11 @@ function classNames(...classes: any) {
 }
 
 const Tabs = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [categories, setCategories] = useState<App.PostGroups | null>(null);
 
   const deleteHandler = async (id: string) => {
+    setLoading(false)
     await fetch(db, {
       body: JSON.stringify({
         data: {
@@ -23,6 +24,7 @@ const Tabs = () => {
       }),
       method: "DELETE",
     }).then((response) => console.log(response));
+    setLoading(true)
   };
 
   useEffect(() => {
