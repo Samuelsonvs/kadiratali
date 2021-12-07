@@ -1,7 +1,7 @@
 import Container from "@/container/Container"
 import React from "react"
 
-import TodoForm from "@/components/layouts/Form"
+import TodoForm from "@/components/Todo/Form"
 
 const Todo = () => {
     return (

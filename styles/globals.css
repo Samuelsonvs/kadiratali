@@ -291,3 +291,13 @@ table {
 }
 
 /* matrix button */
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;       /* Remove default arrow */
+}
+
+select:focus {
+  @apply bg-black bg-transparent
+}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Tabs from "./Tabs";
+import DatePicker, { setDefaultLocale } from "react-datepicker";
 
 type FormValues = {
     tab: string;
@@ -10,14 +11,28 @@ type FormValues = {
 
 const TodoForm = () => {
     const [isForm, setIsForm] = useState<boolean>(false)
+    const [startDate, setStartDate] = useState(new Date());
+    setDefaultLocale("tr")
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
-  console.log(errors)
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    const {tab, name, content } = data
+    await fetch("/api/todo", {
+      body: JSON.stringify({
+        data: {
+          tab,
+          name,
+          content,
+          deadline: startDate
+        }
+      }),
+      method: "POST",
+    }).then((response) => console.log(response))
+  };
 
   return (
     <>
@@ -30,10 +45,23 @@ const TodoForm = () => {
         </button>
         ) : (
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col text-primary">
-        <div className="p-2 pr-0 flex justify-between">
-          <label className="px-2">Tab</label>
-          <input className="custom-input border border-primary py-1 px-2" {...register("tab", { required: true })} />
+        <div className="p-2 pr-0 flex justify-end">
+        <select
+            {...register("tab", { required: true })}
+            className="custom-input px-3 py-2 border-2 border-primary focus:outline-none transition-colors bg-transparent cursor-pointer"
+          >
+            <option value="School">
+              School
+            </option>
+            <option value="Nesine">
+              Nesine
+            </option>
+            <option value="Bootcamp">
+              Bootcamp
+            </option>
+          </select>
         </div>
+        <DatePicker selected={startDate} onChange={(date: Date) => setStartDate(date)} />
         <div className="flex justify-end">
           {errors?.tab && <p className="flex">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">

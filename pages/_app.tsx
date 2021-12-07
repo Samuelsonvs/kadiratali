@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import "../styles/globals.css";
+import "../styles/datepicker.css";
 import * as gtag from '../lib/gtag'
 import { useEffect } from "react"
 import { useRouter } from 'next/router'
