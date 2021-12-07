@@ -1,5 +1,4 @@
 import Container from "@/container/Container";
-import { useRouter } from "next/router";
 
 export default function SnippetLayout({ children, frontMatter }: any) {
   return (

@@ -1,18 +1,10 @@
 import React, { useEffect } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { useForm, useFieldArray, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-interface FormInputs {
-  [key: string]: string;
-  command: string;
-}
+import { App } from "@/interfaces/app";
 
-interface navListType {
-  [key: string]: string;
-}
-
-const navList: navListType = {
+const navList: App.navListType = {
   home: "/",
   blog: "/blog",
   help: "/help",
@@ -28,21 +20,15 @@ const Navbar = () => {
     handleSubmit,
     reset,
     // Read the formState before render to subscribe the form state through Proxy
-    formState: {
-      errors,
-      isDirty,
-      isSubmitSuccessful,
-      touchedFields,
-      submitCount,
-    },
-  } = useForm<FormInputs>();
+    formState: { isSubmitSuccessful },
+  } = useForm<App.FormInputs>();
 
-  const onSubmit = (data: FormInputs) => {
+  const onSubmit = (data: App.FormInputs) => {
     const content = data.command.toLowerCase();
     if (navList[content]) {
       router.push(`${navList[content]}`);
     } else {
-      router.push("/404")
+      router.push("/404");
     }
   };
 

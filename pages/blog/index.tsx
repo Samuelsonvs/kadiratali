@@ -8,17 +8,17 @@ const Blog: NextPage = ({ posts }: any) => {
   const len = posts.length;
   return (
     <Container>
-        <div className="text-green-300 font-mono max-w-3xl mx-auto">
-          {posts.map((s: any, idx: number) => {
-            return (
-              <TextLayout
-                key={idx}
-                text={s.description}
-                underscore={len - 1 === idx ? true : false}
-              />
-            );
-          })}
-        </div>
+      <div className="text-green-300 font-mono max-w-3xl mx-auto">
+        {posts.map((s: any, idx: number) => {
+          return (
+            <TextLayout
+              key={idx}
+              text={s.description}
+              underscore={len - 1 === idx ? true : false}
+            />
+          );
+        })}
+      </div>
     </Container>
   );
 };

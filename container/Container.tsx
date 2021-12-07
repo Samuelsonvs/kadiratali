@@ -1,19 +1,15 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
-import { ContainerProps } from "@/interfaces/interface";
+
+import { App } from "@/interfaces/app";
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
-
-interface drp {
-  [key: number]: number;
-  length: number;
-}
 
 export default function Container({
   children,
   customTitle,
-}: ContainerProps): JSX.Element {
+}: App.ContainerProps): JSX.Element {
   const router = useRouter();
   const meta = {
     title: customTitle ? customTitle : "Kadir Atalı – Test Engineer",
@@ -37,7 +33,7 @@ export default function Container({
         const splitLetters = letters.split("");
         const fontSize = 10;
         const columns = contextWidth / fontSize;
-        let drops: drp = [];
+        let drops: App.drp = [];
         for (let i = 0; i < columns; i++) {
           drops[i] = 1;
         }

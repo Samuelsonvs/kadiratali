@@ -1,7 +1,7 @@
 // eslint-disable-next-line @next/next/no-document-import-in-page
 import Document, { Html, Head, Main, NextScript } from "next/document";
 
-import { GA_TRACKING_ID } from '@/lib/gtag'
+import { GA_TRACKING_ID } from "@/lib/gtag";
 class MyDocument extends Document {
   render() {
     return (

@@ -9,7 +9,7 @@ module.exports = {
         danger: "#e3342f",
       },
       borderColor: {
-        primary: "#32fb32"
+        primary: "#32fb32",
       },
       fontFamily: {
         typography: (theme) => ({

@@ -1,11 +1,6 @@
-import { model, models, Schema, Model, Document } from 'mongoose';
+import { model, models, Schema, Model } from "mongoose";
 
-interface IUser extends Document {
-  tab: string;
-  name: string;
-  content: string;
-  deadline: string;
-}
+import { Database } from "@/interfaces/db";
 
 const TodoSchema = new Schema(
   {
@@ -31,6 +26,6 @@ const TodoSchema = new Schema(
   }
 );
 
-const Todos: Model<IUser> = models.Todos ||  model('Todos', TodoSchema);
+const Todos: Model<Database.IUser> = models.Todos || model("Todos", TodoSchema);
 
 export default Todos;

@@ -1,11 +1,8 @@
 import { useEffect, useRef } from "react";
 
-interface TextLayoutType {
-  text: string;
-  underscore: boolean;
-}
+import { App } from "@/interfaces/app";
 
-const TextLayout = ({ text, underscore }: TextLayoutType) => {
+const TextLayout = ({ text, underscore }: App.TextLayoutType) => {
   const textRef = useRef<HTMLSpanElement>(null);
   const underscoreRef = useRef<HTMLDivElement>(null);
 
