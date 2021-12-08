@@ -26,12 +26,14 @@ export default async function handler(
           content,
           deadline,
         });
-        const entry = await newEntry.save().then(savedEntry => (savedEntry))
+        const entry = await newEntry.save().then((savedEntry) => savedEntry);
         res.status(200).json({ entry });
         break;
       case "DELETE":
         const TodoList = await Todos.findById(id);
-        const isRemove = await TodoList?.remove().then(removedEntry => removedEntry._id.toString() === id);
+        const isRemove = await TodoList?.remove().then(
+          (removedEntry) => removedEntry._id.toString() === id
+        );
         res.status(200).json({ isRemove });
         break;
       default:

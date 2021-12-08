@@ -7,7 +7,7 @@ import { req } from "@/utils/request";
 import dateResolver from "@/utils/dateResolver";
 import SuccessAlert from "../alert";
 
-const TodoForm = ({categories, setter}: App.Categories) => {
+const TodoForm = ({ categories, setter }: App.Categories) => {
   const [isForm, setIsForm] = useState<boolean>(false);
   const [isAdded, setIsAdded] = useState<boolean>(false);
   const [startDate, setStartDate] = useState(new Date());
@@ -20,27 +20,34 @@ const TodoForm = ({categories, setter}: App.Categories) => {
   } = useForm<App.FormValues>();
 
   const onSubmit: SubmitHandler<App.FormValues> = async (data) => {
-    setIsAdded(false)
+    setIsAdded(false);
     const { tab, name, content } = data;
-    const { entry } = await req({method:"POST", tab, name, content, deadline: startDate});
+    const { entry } = await req({
+      method: "POST",
+      tab,
+      name,
+      content,
+      deadline: startDate,
+    });
     if (entry) {
-      const { tab, name, content, deadline, createdAt, _id } = entry
+      const { tab, name, content, deadline, createdAt, _id } = entry;
       const createDate = dateResolver(createdAt);
       const deadlineDate = dateResolver(deadline);
       setter({
         ...categories,
-        [tab]: {...categories[tab],[_id]:{ _id, content, tab, name, createDate, deadlineDate}}
-      })
-      reset()
-      setIsAdded(true)
+        [tab]: {
+          ...categories[tab],
+          [_id]: { _id, content, tab, name, createDate, deadlineDate },
+        },
+      });
+      reset();
+      setIsAdded(true);
     }
   };
 
   return (
     <>
-      <div
-        className="flex py-12 justify-center"
-      >
+      <div className="flex py-12 justify-center">
         {!isForm ? (
           <button
             onClick={() => setIsForm(true)}
@@ -155,11 +162,11 @@ const TodoForm = ({categories, setter}: App.Categories) => {
             <div className="flex justify-end">
               <input className="matrix-btn" type="submit" value="Add" />
             </div>
-            {isAdded && <SuccessAlert state={"add"}/>}
+            {isAdded && <SuccessAlert state={"add"} />}
           </form>
         )}
       </div>
-      </>
+    </>
   );
 };
 

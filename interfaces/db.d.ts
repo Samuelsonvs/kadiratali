@@ -36,5 +36,4 @@ export namespace Database {
     body: string;
     method: string;
   }
-
 }
