@@ -5,19 +5,22 @@ import DatePicker, { setDefaultLocale } from "react-datepicker";
 import { App } from "@/interfaces/app";
 import { req } from "@/utils/request";
 import dateResolver from "@/utils/dateResolver";
+import SuccessAlert from "../alert";
 
 const TodoForm = ({categories, setter}: App.Categories) => {
   const [isForm, setIsForm] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isAdded, setIsAdded] = useState<boolean>(false);
   const [startDate, setStartDate] = useState(new Date());
   setDefaultLocale("tr");
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<App.FormValues>();
 
   const onSubmit: SubmitHandler<App.FormValues> = async (data) => {
+    setIsAdded(false)
     const { tab, name, content } = data;
     const { entry } = await req({method:"POST", tab, name, content, deadline: startDate});
     if (entry) {
@@ -28,14 +31,15 @@ const TodoForm = ({categories, setter}: App.Categories) => {
         ...categories,
         [tab]: {...categories[tab],[_id]:{ _id, content, tab, name, createDate, deadlineDate}}
       })
+      reset()
+      setIsAdded(true)
     }
   };
 
   return (
+    <>
       <div
-        className={`flex py-12 ${
-          isForm ? "justify-end sm:justify-center" : "justify-center"
-        }`}
+        className="flex py-12 justify-center"
       >
         {!isForm ? (
           <button
@@ -151,9 +155,11 @@ const TodoForm = ({categories, setter}: App.Categories) => {
             <div className="flex justify-end">
               <input className="matrix-btn" type="submit" value="Add" />
             </div>
+            {isAdded && <SuccessAlert state={"add"}/>}
           </form>
         )}
       </div>
+      </>
   );
 };
 

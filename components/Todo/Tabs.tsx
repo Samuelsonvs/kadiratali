@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Tab } from "@headlessui/react";
 
 import dateResolver from "@/utils/dateResolver";
-import Loading from "../Loading";
+import Loading from "../loading";
 import { App } from "@/interfaces/app";
 import { req } from "@/utils/request";
 import TodoForm from "./Form";
+import SuccessAlert from "../alert";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -13,19 +14,21 @@ function classNames(...classes: any) {
 
 const Tabs = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [isRemoved, setIsRemoved] = useState<boolean>(false);
   const [categories, setCategories] = useState<App.PostGroups | null>(null);
 
   const deleteHandler = async (id: string, tab: string) => {
     setLoading(true)
+    setIsRemoved(false)
     const { isRemove } = await req({method:"DELETE", id});
     if (isRemove) {
       const removedTodo = (Object.values(categories![tab])).filter((todo:any) => todo._id !== id);
       setCategories({...categories,[tab]:{...removedTodo}})
+      setIsRemoved(true)
     }
     setLoading(false)
   };
 
-  console.log(loading)
   useEffect(() => {
     setLoading(true);
     (async () => {
@@ -124,6 +127,7 @@ const Tabs = () => {
                 </ul>
               </Tab.Panel>
             ))}
+            {isRemoved && <SuccessAlert state={"remove"} />}
           </Tab.Panels>
         </Tab.Group>
       ) : (
