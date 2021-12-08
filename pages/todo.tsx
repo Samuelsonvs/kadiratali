@@ -1,7 +1,7 @@
 import Container from "@/container/Container";
 import React from "react";
 
-import TodoForm from "@/components/Todo/Form";
+import Tabs from "@/components/Todo/Tabs";
 
 const Todo = () => {
   return (
@@ -11,7 +11,7 @@ const Todo = () => {
           Simulacra and Simulation
         </h1>
         <div>
-          <TodoForm />
+          <Tabs />
         </div>
         <div className="text-primary"></div>
       </div>

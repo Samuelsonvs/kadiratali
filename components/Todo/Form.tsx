@@ -3,11 +3,12 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import DatePicker, { setDefaultLocale } from "react-datepicker";
 
 import { App } from "@/interfaces/app";
-import Tabs from "./Tabs";
-import { db } from "@/lib/endpoints";
+import { req } from "@/utils/request";
+import dateResolver from "@/utils/dateResolver";
 
-const TodoForm = () => {
+const TodoForm = ({categories, setter}: App.Categories) => {
   const [isForm, setIsForm] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [startDate, setStartDate] = useState(new Date());
   setDefaultLocale("tr");
   const {
@@ -18,21 +19,19 @@ const TodoForm = () => {
 
   const onSubmit: SubmitHandler<App.FormValues> = async (data) => {
     const { tab, name, content } = data;
-    await fetch(db, {
-      body: JSON.stringify({
-        data: {
-          tab,
-          name,
-          content,
-          deadline: startDate,
-        },
-      }),
-      method: "POST",
-    }).then((response) => console.log(response));
+    const { entry } = await req({method:"POST", tab, name, content, deadline: startDate});
+    if (entry) {
+      const { tab, name, content, deadline, createdAt, _id } = entry
+      const createDate = dateResolver(createdAt);
+      const deadlineDate = dateResolver(deadline);
+      setter({
+        ...categories,
+        [tab]: {...categories[tab],[_id]:{ _id, content, tab, name, createDate, deadlineDate}}
+      })
+    }
   };
 
   return (
-    <>
       <div
         className={`flex py-12 ${
           isForm ? "justify-end sm:justify-center" : "justify-center"
@@ -155,8 +154,6 @@ const TodoForm = () => {
           </form>
         )}
       </div>
-      <Tabs />
-    </>
   );
 };
 

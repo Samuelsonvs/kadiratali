@@ -49,8 +49,16 @@ export namespace App {
   }
 
   interface PostGroups {
-    School: Post;
-    Nesine: Post;
-    Bootcamp: Post;
+    [key: string]: string[];
+    School?: Post
+    Nesine?: Post
+    Bootcamp?: Post
   }
+
+  interface Categories {
+    categories: App.PostGroups | any | null 
+    setter: Dispatch<SetStateAction<App.PostGroups | any | null>>;
+  }
+
+  
 }

@@ -20,5 +20,21 @@ export namespace Database {
       deadline: string;
     };
     allTodos?: any;
+    entry?: any;
+    isRemove?: boolean;
   }
+
+  interface Request {
+    method: string;
+    id?: string;
+    tab?: string;
+    name?: string;
+    content?: string;
+    deadline?: string | Date;
+  }
+  interface CurrentRequestParams {
+    body: string;
+    method: string;
+  }
+
 }

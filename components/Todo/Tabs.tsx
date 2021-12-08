@@ -3,8 +3,9 @@ import { Tab } from "@headlessui/react";
 
 import dateResolver from "@/utils/dateResolver";
 import Loading from "../Loading";
-import { db } from "@/lib/endpoints";
 import { App } from "@/interfaces/app";
+import { req } from "@/utils/request";
+import TodoForm from "./Form";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -14,24 +15,21 @@ const Tabs = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [categories, setCategories] = useState<App.PostGroups | null>(null);
 
-  const deleteHandler = async (id: string) => {
-    setLoading(false)
-    await fetch(db, {
-      body: JSON.stringify({
-        data: {
-          id,
-        },
-      }),
-      method: "DELETE",
-    }).then((response) => console.log(response));
+  const deleteHandler = async (id: string, tab: string) => {
     setLoading(true)
+    const { isRemove } = await req({method:"DELETE", id});
+    if (isRemove) {
+      const removedTodo = (Object.values(categories![tab])).filter((todo:any) => todo._id !== id);
+      setCategories({...categories,[tab]:{...removedTodo}})
+    }
+    setLoading(false)
   };
 
+  console.log(loading)
   useEffect(() => {
+    setLoading(true);
     (async () => {
-      const { allTodos } = await fetch(db)
-        .then((res) => res.json())
-        .then((promis) => promis);
+      const { allTodos } = await req({method:"GET"});
       if (allTodos) {
         const filteredTodos = allTodos.reduce(
           (acc: any, cur: any) => {
@@ -42,7 +40,7 @@ const Tabs = () => {
               ...acc,
               [tab]: [
                 ...acc[tab],
-                { _id, content, name, createDate, deadlineDate },
+                { _id, content, tab, name, createDate, deadlineDate },
               ],
             };
           },
@@ -55,13 +53,15 @@ const Tabs = () => {
           Bootcamp: { ...Bootcamp },
         });
       }
-      setLoading(true);
+      setLoading(false);
     })();
   }, []);
 
   return (
+    <>
+    <TodoForm categories={categories} setter={setCategories}/>
     <div className="text-primary">
-      {loading && categories ? (
+      {!loading && categories ? (
         <Tab.Group>
           <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
             {Object.keys(categories).map((category) => (
@@ -103,7 +103,7 @@ const Tabs = () => {
                         <li>&#8594;</li>
                         <li>{post.deadlineDate}</li>
                         <li>
-                          <button onClick={() => deleteHandler(post._id)}>
+                          <button onClick={() => deleteHandler(post._id, post.tab)}>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               className="h-5 w-5"
@@ -130,6 +130,7 @@ const Tabs = () => {
         <Loading />
       )}
     </div>
+    </>
   );
 };
 

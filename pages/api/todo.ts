@@ -15,6 +15,10 @@ export default async function handler(
     req.body && JSON.parse(req.body).data;
   try {
     switch (method) {
+      case "GET":
+        const allTodos = await Todos.find({});
+        res.status(200).json({ allTodos });
+        break;
       case "POST":
         const newEntry = new Todos({
           name,
@@ -22,17 +26,16 @@ export default async function handler(
           content,
           deadline,
         });
-        await newEntry.save();
-        res.status(200).json({ newEntry });
+        const entry = await newEntry.save().then(savedEntry => (savedEntry))
+        res.status(200).json({ entry });
         break;
       case "DELETE":
         const TodoList = await Todos.findById(id);
-        await TodoList?.remove();
-        res.status(200).json({ remove: "Comment has been removed" });
+        const isRemove = await TodoList?.remove().then(removedEntry => removedEntry._id.toString() === id);
+        res.status(200).json({ isRemove });
         break;
       default:
-        const allTodos = await Todos.find({});
-        res.status(200).json({ allTodos });
+        res.status(200).json({ undef: "Undefined method" });
         break;
     }
   } catch (err) {
