@@ -15,7 +15,7 @@
     "@types/mongoose": "^5.11.97",
     "esbuild": "^0.12.25",
     "gray-matter": "^4.0.3",
-    "mdx-bundler": "^6.0.1",
+    "mdx-bundler": "^8.0.1",
     "mongoose": "^6.1.9",
     "next": "11.1.3",
     "prettier": "^2.4.1",
